@@ -7,3 +7,8 @@ __pycache__/
 *.pth
 *.h5
 *.ckpt
+
+# Ignore datasets
+data/
+notebooks/data/
+*.tar.gz
