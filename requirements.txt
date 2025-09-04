@@ -2,3 +2,5 @@ optuna
 scikit-learn
 pandas
 seaborn
+plotly==5.24.1
+torchvision
