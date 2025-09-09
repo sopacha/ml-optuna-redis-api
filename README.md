@@ -19,15 +19,55 @@ An experimental project to explore **hyperparameter optimization with Optuna** a
 
 ---
 
-## Planned Features
+## ⚡ Features
+- Upload an image with **FastAPI**
+- Store uploaded images in **Redis**
+- Run inference using a **PyTorch model**
+- Return prediction results as JSON
+- Portable with **Docker + docker-compose**
 
-| Feature                         | Description |
-|--------------------------------|-------------|
-| **Model Training & Optimization** | Train a small CNN or XGBoost model, tune with Optuna, and save the best trial to Redis. |
-| **Prediction Endpoint**        | `/predict` endpoint takes input data (image or tabular), checks Redis cache by hash, and returns results. |
-| **Optimization Dashboard** (optional) | Use `optuna-dashboard` to visualize trial history and optimization progress. |
-| **Dockerized Setup**           | One container for API, one for Redis. |
+---
 
+## Installation (Local)
 
-## 📂 Project Status
-**Work in Progress** — Currently setting up repository structure and environment. Implementation steps will be added incrementally.  
+### 1. Clone the repository
+```bash
+git clone https://github.com/sopacha/ml-optuna-redis-api.git
+cd ml-optuna-redis-api.git
+```
+
+### 2. Install dependencies
+```bash 
+pip install -r requirements.txt
+```
+
+### 3. Start Redis
+```bash
+redis-server
+```
+
+---
+
+## Usage (Local)
+
+### 1. Run the API server
+
+```bash
+uvicorn app.main:app --reload
+```
+
+### 2. Test the API
+Visit http://127.0.0.1:8000/docs
+
+---
+
+## Run with Docker
+
+### 1. Build and run with docker-compose
+
+```bash
+docker-compose up --build
+```
+
+### 2. Test the API
+Visit http://127.0.0.1:8000/docs

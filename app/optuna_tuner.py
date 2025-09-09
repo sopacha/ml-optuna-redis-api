@@ -10,7 +10,6 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 MODEL_PATH = "best_model.pth"
 
 def train_and_evaluate(model, train_loader, test_loader, lr, epochs=1):
-    """Train model briefly and return accuracy."""
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=lr)
 
@@ -39,7 +38,6 @@ def train_and_evaluate(model, train_loader, test_loader, lr, epochs=1):
 
 
 def objective(trial):
-    """Objective function for Optuna."""
     lr = trial.suggest_loguniform("lr", 1e-4, 1e-1)
     batch_size = trial.suggest_categorical("batch_size", [32, 64, 128])
 
@@ -51,7 +49,6 @@ def objective(trial):
 
 
 def tune_hyperparameters(n_trials=10):
-    """Run Optuna hyperparameter tuning."""
     study = optuna.create_study(direction="minimize")
     study.optimize(objective, n_trials=n_trials)
 
@@ -66,6 +63,12 @@ def tune_hyperparameters(n_trials=10):
     # Save model
     torch.save(model.state_dict(), MODEL_PATH)
     print(f"Best model saved to {MODEL_PATH}")
+    
+    return {
+        "best_params": best_params,
+        "best_acc": 1 - study.best_value,
+        "model_path": MODEL_PATH
+    }
 
 
 if __name__ == "__main__":

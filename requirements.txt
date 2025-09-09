@@ -7,3 +7,4 @@ torchvision
 fastapi
 uvicorn
 python-multipart
+redis
